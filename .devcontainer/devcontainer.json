@@ -1,0 +1,44 @@
+{
+  "name": "TypeScript Vitest Development Environment",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "ms-vscode.vscode-json",
+        "christian-kohler.path-intellisense",
+        "streetsidesoftware.code-spell-checker",
+        "ms-vscode.vscode-eslint",
+        "dbaeumer.vscode-eslint",
+        "vitest.explorer",
+        "ms-vscode.test-adapter-converter"
+      ],
+      "settings": {
+        "typescript.preferences.preferTypeOnlyAutoImports": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "vitest.enable": true,
+        "vitest.commandLine": "pnpm test"
+      }
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "postCreateCommand": "npm install -g pnpm@latest && pnpm install",
+  "postStartCommand": "pnpm install",
+  "mounts": [
+    "source=${localWorkspaceFolder}/node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+  ],
+  "remoteEnv": {
+    "SHELL": "/bin/bash"
+  },
+  "containerEnv": {
+    "NODE_ENV": "development"
+  }
+}
